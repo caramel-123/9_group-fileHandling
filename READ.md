@@ -1,108 +1,142 @@
-# Inventory Management System in C
+# 📦 Inventory Management System
 
-A simple console-based Inventory Management System written in C that allows users to create, store, update, and display product inventory records using file handling.
+A file-handling C program that manages product inventory by reading, updating, and saving records to `Inventory.txt`.
 
-## Features
+## 📋 Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Data Structure](#data-structure)
+- [Program Flow](#program-flow)
+- [How to Run](#how-to-run)
+- [Sample Usage](#sample-usage)
+- [File Format](#file-format)
+- [Design Decisions](#design-decisions)
 
-- Add multiple products
-- Store inventory records in a text file (Inventory.txt)
-- Search products using Product Code
-- Update product quantities
-  - Add stock (A)
-  - Subtract stock (S)
-- Display the current inventory
-- Save updated records back to the file
-- Input validation for product searching
+## 🔍 Overview
+This program allows users to input an initial inventory of N products, save them to `Inventory.txt`, and optionally update each product's quantity using Add or Subtract operations. The updated records are saved back to the file and displayed on screen.
 
-## Concepts Demonstrated
+## ✨ Features
+- Input N number of products with code, name, and quantity
+- Save initial inventory to `Inventory.txt`
+- Validate product codes before updating
+- Add or subtract quantity per product using update codes `A` and `S`
+- Loop update process until user chooses to stop
+- Save updated inventory back to file and display on screen
 
-This project demonstrates the following C programming concepts:
+## 🗂️ Data Structure
 
-- Structures (struct)
-- Arrays of Structures
-- Functions
-- File Handling
-  - fopen()
-  - fprintf()
-  - fclose()
-- String Handling
-  - strcmp()
-  - strlen()
-  - fgets()
-- Character Functions
-  - toupper()
-- Loops and Conditional Statements
+| Field | Type | Description |
+|---|---|---|
+| `code` | `char[10]` | Unique product code |
+| `name` | `char[50]` | Name of the product |
+| `quantity` | `int` | Current stock quantity |
 
-## File Structure
+## 🔄 Program Flow
 
-text Inventory.txt 
+### Step 1 — Input Products
+- User enters how many products to add
+- For each product: input code, name, and quantity
+- All records are saved to `Inventory.txt`
 
-The inventory file stores records in the following format:
+### Step 2 — Update Prompt
+- Program asks `Do you want to update the inventory? [Y/N]`
+- If `N`: displays the initial inventory and terminates
+- If `Y`: proceeds to update loop
 
-text P001       Ballpen              100 P002       Notebook             50 P003       Pencil               75 
+### Step 3 — Update Loop
+- User inputs a product code
+- If code is not found: prints `Record not found` and asks again
+- If code is found: user inputs update code and quantity
+  - `A` — Adds the quantity to current stock
+  - `S` — Subtracts the quantity from current stock
+- Asks `Update more? [Y/N]` after each update
+- Loop continues until user enters `N`
 
-## Program Workflow
+### Step 4 — Save and Display
+- Updated records are saved back to `Inventory.txt`
+- Updated inventory is displayed on screen with headers
 
-### 1. Enter Products
+## ▶️ How to Run
 
-The user specifies the number of products and enters:
+Compile:
+```bash
+gcc inventory.c -o inventory
+```
 
-- Product Code
-- Product Name
-- Quantity
+Run:
+```bash
+./inventory
+```
 
-Example:
+## 💡 Sample Usage
 
-text Product Code: P001 Product Name: Ballpen Quantity: 100 
+Input products:
+```
+Please enter how many products: 3
 
-### 2. Save Initial Inventory
+Product Code: PN
+Product Name: Pencil
+Quantity: 50
 
-The program writes all product records to:
+Product Code: ER
+Product Name: Eraser
+Quantity: 30
 
-text Inventory.txt 
+Product Code: SH
+Product Name: Sharpener
+Quantity: 20
+```
 
-### 3. Update Inventory
+Initial `Inventory.txt`:
+```
+PN      Pencil          50
+ER      Eraser          30
+SH      Sharpener       20
+```
 
-The user may choose to update product quantities.
+Update process:
+```
+Do you want to update the inventory? [Y/N]: Y
 
-Example:
+Product Code: ER
+Update Code: A
+Quantity: 30
+Update more? [Y/N]: Y
 
-text Product Code: P001 Update Code (A = Add / S = Subtract): A Quantity: 25 
+Product Code: PN
+Update Code: S
+Quantity: 10
+Update more? [Y/N]: N
+```
 
-Result:
+Updated inventory displayed:
+```
+Product Code        Product Name        Quantity
+PN                  Pencil              40
+ER                  Eraser              60
+SH                  Sharpener           20
+```
 
-text 100 + 25 = 125 
+## 📄 File Format
 
-### 4. Save Updated Inventory
+Records in `Inventory.txt` are tab-separated:
+```
+PN      Pencil      50
+ER      Eraser      30
+SH      Sharpener   20
+```
 
-After all updates are completed, the inventory file is rewritten with the latest quantities.
+| Column | Description |
+|---|---|
+| 1 | Product Code |
+| 2 | Product Name |
+| 3 | Quantity |
 
-### 5. Display Inventory
+## 🔧 Design Decisions
+- **Validation Loop** — If product code is not found, program keeps asking until a valid code is entered instead of skipping
+- **File Persistence** — `Inventory.txt` is overwritten on both initial save and after updates to always reflect the latest state
+- **In-memory Updates** — All changes are made to the array in memory first, then written to file in one go at the end
+- **Flexible N** — Program supports any number of products up to 100
 
-The final inventory is displayed on the screen.
-
-Example:
-
-text Product Code    Product Name         Quantity ------------    ------------------   -------- P001            Ballpen              125 P002            Notebook             50 P003            Pencil               75 
-
-## Compilation
-
-Using GCC:
-
-bash gcc inventory.c -o inventory 
-
-## Running the Program
-
-bash ./inventory 
-
-For Windows:
-
-bash inventory.exe 
-
-## Sample Execution
-
-text Please enter how many products: 2  Product Code: P001 Product Name: Ballpen Quantity: 100  Product Code: P002 Product Name: Notebook Quantity: 50  Do you want to update the inventory? [Y/N]: Y  Product Code: P001 Update Code (A = Add / S = Subtract): A Quantity: 20  Update more? [Y/N]: N 
-
-## Author
-
-Mel
+## 👨‍💻 Author
+Made for academic purposes as a C programming file handling exercise.
