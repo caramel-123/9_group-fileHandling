@@ -2,7 +2,6 @@
 # 📚 Student Grade File Management System
 
 A menu-driven C program that manages student academic records stored in a persistent text file (`grades.txt`).
-
 ---
 
 ## 📋 Table of Contents
