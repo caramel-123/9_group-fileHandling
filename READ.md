@@ -1,129 +1,108 @@
-# 🚗 Vehicle Service Management System
+# Inventory Management System in C
 
-A structured C program that manages vehicle service records using nested structs, file I/O, and search functionality.
+A simple console-based Inventory Management System written in C that allows users to create, store, update, and display product inventory records using file handling.
 
-## 📋 Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Data Structure](#data-structure)
-- [Program Flow](#program-flow)
-- [How to Run](#how-to-run)
-- [Sample Usage](#sample-usage)
-- [File Format](#file-format)
+## Features
 
-## 🔍 Overview
-This program collects service information for 5 vehicles, displays records, filters by service cost, saves data to a file, and allows searching by plate number. Built as a C programming exercise covering structs, arrays, functions, and file handling.
+- Add multiple products
+- Store inventory records in a text file (Inventory.txt)
+- Search products using Product Code
+- Update product quantities
+  - Add stock (A)
+  - Subtract stock (S)
+- Display the current inventory
+- Save updated records back to the file
+- Input validation for product searching
 
-## ✨ Features
-- Input details for 5 vehicles using an array of structs
-- Display all vehicle records with plate number, owner, and service type
-- Filter and display only vehicles with service cost above 500
-- Save all records to `service.txt`
-- Load records from file and search by plate number
+## Concepts Demonstrated
 
-## 🗂️ Data Structure
+This project demonstrates the following C programming concepts:
 
-### ServiceRecord
-| Field | Type | Description |
-|---|---|---|
-| `date` | `char[20]` | Date of service |
-| `serviceCost` | `float` | Cost of the service |
+- Structures (struct)
+- Arrays of Structures
+- Functions
+- File Handling
+  - fopen()
+  - fprintf()
+  - fclose()
+- String Handling
+  - strcmp()
+  - strlen()
+  - fgets()
+- Character Functions
+  - toupper()
+- Loops and Conditional Statements
 
-### Vehicle (contains nested ServiceRecord)
-| Field | Type | Description |
-|---|---|---|
-| `plateNumber` | `char[20]` | Vehicle plate number |
-| `ownerName` | `char[50]` | Name of the owner |
-| `serviceType` | `char[50]` | Type of service performed |
-| `record` | `ServiceRecord` | Nested service record |
+## File Structure
 
-## 🔄 Program Flow
+text Inventory.txt 
 
-### Easy Task
-- Input 5 vehicles via `scanf`
-- `displayAllVehicles()` prints plate number, owner name, and service type for each
+The inventory file stores records in the following format:
 
-### Average Task
-- `displayExpensiveServices()` filters and prints only vehicles with service cost above 500
+text P001       Ballpen              100 P002       Notebook             50 P003       Pencil               75 
 
-### Difficult Task
-- `saveToFile()` writes all records to `service.txt` using pipe `|` as delimiter
-- `loadAndSearch()` reads from `service.txt` and lets user search by plate number
+## Program Workflow
 
-## ▶️ How to Run
+### 1. Enter Products
 
-Compile:
-```bash
-gcc vsms.c -o vsms
-```
+The user specifies the number of products and enters:
 
-Run:
-```bash
-./vsms
-```
+- Product Code
+- Product Name
+- Quantity
 
-## 💡 Sample Usage
+Example:
 
-Input:
-```
-Enter details for 5 vehicles:
+text Product Code: P001 Product Name: Ballpen Quantity: 100 
 
-Vehicle 1
-Plate Number: 001
-Owner Name: Juan dela Cruz
-Service Type: Carwash
-Service Date: January 5, 2025
-Service Cost: 100
-```
+### 2. Save Initial Inventory
 
-Display all vehicles:
-```
---- Vehicle Records ---
+The program writes all product records to:
 
-Vehicle 1:
-Plate Number: 001
-Owner Name: Juan dela Cruz
-Service Type: Carwash
-```
+text Inventory.txt 
 
-Display vehicles with cost above 500:
-```
---- Vehicles with Service Cost Above 500 ---
+### 3. Update Inventory
 
-Plate Number: 003
-Owner Name: Joshua Lopez
-Service Type: Repaint
-Date: February 25, 2025
-Service Cost: 4500.00
-```
+The user may choose to update product quantities.
 
-Search by plate number:
-```
-Enter Plate Number to search: 003
+Example:
 
---- Search Result ---
+text Product Code: P001 Update Code (A = Add / S = Subtract): A Quantity: 25 
 
-Plate Number: 003
-Owner Name: Joshua Lopez
-Service Type: Repaint
-Date: February 25, 2025
-Service Cost: 4500.00
-```
+Result:
 
-## 📄 File Format
+text 100 + 25 = 125 
 
-Records in `service.txt` are pipe-separated:
-```
-001|Juan dela Cruz|Carwash|January 5, 2025|100.00
-002|Dave Garcia|Change Oil|January 20, 2025|500.00
-003|Joshua Lopez|Repaint|February 25, 2025|4500.00
-```
+### 4. Save Updated Inventory
 
-## 🔧 Design Decisions
-- **Nested Struct** — `ServiceRecord` is embedded inside `Vehicle` to group related data cleanly
-- **Pipe Delimiter** — `|` is used in `service.txt` instead of spaces or commas since dates and names contain spaces
-- **Functions Outside main()** — All display and file functions are defined outside `main()` as required
-- **Soft Search** — `loadAndSearch()` loads the entire file into memory first before searching
+After all updates are completed, the inventory file is rewritten with the latest quantities.
 
-## 👨‍💻 Author
-Made for academic purposes as a C programming structs and file handling exercise.
+### 5. Display Inventory
+
+The final inventory is displayed on the screen.
+
+Example:
+
+text Product Code    Product Name         Quantity ------------    ------------------   -------- P001            Ballpen              125 P002            Notebook             50 P003            Pencil               75 
+
+## Compilation
+
+Using GCC:
+
+bash gcc inventory.c -o inventory 
+
+## Running the Program
+
+bash ./inventory 
+
+For Windows:
+
+bash inventory.exe 
+
+## Sample Execution
+
+text Please enter how many products: 2  Product Code: P001 Product Name: Ballpen Quantity: 100  Product Code: P002 Product Name: Notebook Quantity: 50  Do you want to update the inventory? [Y/N]: Y  Product Code: P001 Update Code (A = Add / S = Subtract): A Quantity: 20  Update more? [Y/N]: N 
+
+## Author
+
+Mel
