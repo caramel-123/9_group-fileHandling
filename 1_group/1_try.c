@@ -14,7 +14,7 @@ int loadInventory(struct Product product[]) {
   }
   int count = 0;
   while (fscanf(fp, "%s %s %d", product[count].code, product[count].name, &product[count].qty) == 3) {
-    count++;
+    count++; //2
   }
   fclose(fp);
   return count;
@@ -49,6 +49,7 @@ void displayInventory() {
 	}
 	fclose(fp);
 }
+
 int findProduct(struct Product product[], int productSize, char searchCode[]) {
   for (int i=0; i<productSize; i++) {
     if (strcmp(product[i].code, searchCode) == 0) {
@@ -119,7 +120,6 @@ int main() {
     displayInventory();
     return 0;
   }
-
   do {
     
     char searchCode[80];

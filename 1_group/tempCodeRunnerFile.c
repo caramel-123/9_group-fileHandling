@@ -1,0 +1,1 @@
+        product[sameIndex].qty -= updateQty;
