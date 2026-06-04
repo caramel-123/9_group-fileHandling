@@ -1,0 +1,8 @@
+PN	Pencil	50
+ER	Eraser	30
+SH	Sharpener	20
+MK	MIlk	20
+ml	milk	2
+fg	fgd	2
+sd	sdf	23
+wr	wra	2
