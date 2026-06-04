@@ -28,13 +28,13 @@ void saveInventory(struct Product product[], int existingProductSize) {
     return;
   }
   for (int i=0; i<existingProductSize; i++) {
-    fprintf(fp, "%s\t%s\t%d\n", product[i].code, product[i].name, product[i].qty);
+    fprintf(fp, "%-10s\t%-20s\t%d\n", product[i].code, product[i].name, product[i].qty);
   }
   fclose(fp);
 }
 
 void displayInventory() {
-  printf("\nProduct Code\t\tProduct Name\t\tQuantity\n");
+  printf("\n%-15s %-20s %s\n", "Product Code", "Product Name", "Quantity");
   FILE *fp;
   fp = fopen("Inventory.txt", "r");
   if (fp == NULL) {
@@ -44,7 +44,7 @@ void displayInventory() {
   char code[10], name[50];
   int qty;
   while (fscanf(fp, "%s %s %d", code, name, &qty) == 3) {
-    printf("%s\t\t\t%s\t\t\t%d\n", code, name, qty);
+    printf("%-15s %-20s %d\n", code, name, qty);
   }
   fclose(fp);
 }
