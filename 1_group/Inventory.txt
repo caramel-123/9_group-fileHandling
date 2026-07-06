@@ -1,3 +1,0 @@
-PN        	Pencil              	40
-ER        	Eraser              	60
-S         	Sharpener           	20
